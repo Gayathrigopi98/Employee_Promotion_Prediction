@@ -6,7 +6,7 @@ import sklearn
 import warnings
 warnings.filterwarnings('ignore')
 
-st.title("Promotion Prediction Model")
+st.title("Employee Promotion Prediction")
 
 df = pd.read_csv("train.csv")
 
@@ -51,6 +51,13 @@ if st.button("Predict"):
     try:
         X_input = pd.DataFrame([input_data])  
         prediction = model.predict(X_input)
-        st.success(f"Prediction: {'Promoted' if prediction[0] == 1 else 'Not Promoted'}")
+        if prediction[0]==1:
+            st.markdown(
+                "<h3 style='color: green;'>Employee Promoted.</h3>",unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                "<h3 style='color: red;'>Employee not promoted.</h3>",unsafe_allow_html=True
+            )
     except Exception as e:
         st.error(f"Error during prediction: {e}")
